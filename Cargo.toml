@@ -2,3 +2,6 @@
 name = "autotype"
 version = "0.1.0"
 authors = ["elliotc12 <elliotc12@gmail.com>"]
+
+[dependencies]
+   rusqlite = "0.7.3"
