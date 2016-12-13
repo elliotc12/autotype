@@ -1,32 +1,45 @@
 extern crate autotype;
-extern crate rusqlite;
-
-use std::process::Command;
-use rusqlite::Connection;
 
 fn main() {
-    initialize_database();
-    println!("Properly initialized.");
+    let _sqlite_conn = autotype::database::initialize_database();
+    loop {
+        match wait_for_action() {
+            UserAction::_Cmd(cmd) => respond_to_cmd(cmd),
+            UserAction::_CD(dir) => respond_to_cd(dir),
+            UserAction::_PrintProbabilities(cmd_fragment) => print_probabilities(cmd_fragment),
+            UserAction::_Autocomplete(cmd_fragment) => autocomplete(cmd_fragment),
+            UserAction::_Nothing => println!("nothing doing!"),
+        };
+    }
 }
 
-fn initialize_database() {
+fn respond_to_cmd(_cmd: String) {
 
-    let sqlite_path = "autotype.db";
-    let sqlite_conn = Connection::open(&sqlite_path).expect("Could not open sqlite3 db autotype.db");
-    
-    match sqlite_conn.query_row(".schema dir_history", &[], |row| { row.get(0) })
-    {
-        Ok(_) => {
-            println!("Already exists, returning.");
-            return;
-        }
-        Err(_) => {
-            println!("Doesn't exist!");
-        }
-    }
+}
 
+fn respond_to_cd(_dir: String) {
 
-    sqlite_conn.execute("CREATE TABLE dir_history (num int, dir varchar(200), cmd varchar(100), PRIMARY KEY (cmd));", &[]).expect("Could not create dir_history table.");
+}
+
+fn print_probabilities(_cmd_fragment: String) {
+
+}
+
+fn autocomplete(_cmd_fragment: String) {
+
+}
+
+enum UserAction {
+    _Cmd (String),
+    _CD (String),
+    _PrintProbabilities (String),
+    _Autocomplete (String),
+    _Nothing,
+}
+
+fn wait_for_action() -> UserAction {
+    std::thread::sleep(std::time::Duration::from_millis(5000));
+    UserAction::_Nothing
 }
 
 

@@ -1,3 +1,5 @@
+pub mod database;
+
 pub struct PwdNumUses {
        pub name: String,
        pub num: i32
