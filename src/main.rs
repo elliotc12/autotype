@@ -1,4 +1,5 @@
 extern crate autotype;
+use autotype::database;
 
 fn main() {
     let _sqlite_conn = autotype::database::initialize_database();
@@ -17,8 +18,8 @@ fn respond_to_cmd(_cmd: String) {
 
 }
 
-fn respond_to_cd(_dir: String) {
-
+fn respond_to_cd(dir: String) {
+    repopulate_probability_struct(dir);
 }
 
 fn print_probabilities(_cmd_fragment: String) {

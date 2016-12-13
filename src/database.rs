@@ -1,6 +1,9 @@
 extern crate rusqlite;
 
 use self::rusqlite::Connection;
+use std::collections::HashMap;
+
+use super::*;
 
 pub fn initialize_database() -> rusqlite::Connection {
     let sqlite_path = "autotype.db";
@@ -20,4 +23,10 @@ pub fn initialize_database() -> rusqlite::Connection {
     sqlite_conn.execute(cmd_history_create_sql, &[]).expect("Failed to make table cmd_history");
 
     sqlite_conn
+}
+
+pub fn repopulate_data_struct() -> (Vec<String>, HashMap<&str, CmdInfo>) {
+    let allCmds: Vec<String> = vec![];
+    let cmdMap: HashMap<&str, CmdInfo> = HashMap::new();
+    (allCmds, cmdMap)
 }
