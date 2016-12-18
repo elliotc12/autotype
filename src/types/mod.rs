@@ -1,21 +1,19 @@
 use std::collections::HashMap;
 
-pub mod database;
-
 pub struct PwdNumUses {
        pub name: String,
        pub num: i32
 }
 
-pub struct Command {
+pub struct Command<'a> {
        pub word: String,
-       pub pwd_info: Vec<PwdNumUses>
+       pub pwd_info: Vec<&'a PwdNumUses>
 }
 
-pub struct CmdInfo {
+pub struct CmdInfo<'a> {
     pub this_dir_frequency: i32,
     pub total_frequency: i32,
-    pub PrevCmdMap: HashMap<&str, PrevCmdInfo>,
+    pub prev_cmd_map: HashMap<&'a str, &'a PrevCmdInfo>,
 }
 
 pub struct PrevCmdInfo {

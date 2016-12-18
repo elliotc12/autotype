@@ -3,7 +3,7 @@ extern crate rusqlite;
 use self::rusqlite::Connection;
 use std::collections::HashMap;
 
-use super::*;
+use super::types as types;
 
 pub fn initialize_database() -> rusqlite::Connection {
     let sqlite_path = "autotype.db";
@@ -25,8 +25,8 @@ pub fn initialize_database() -> rusqlite::Connection {
     sqlite_conn
 }
 
-pub fn repopulate_data_struct() -> (Vec<String>, HashMap<&str, CmdInfo>) {
-    let allCmds: Vec<String> = vec![];
-    let cmdMap: HashMap<&str, CmdInfo> = HashMap::new();
-    (allCmds, cmdMap)
+pub fn get_new_probability_struct<'a>(dir: String) -> (Vec<String>, HashMap<&'a str, &'a types::CmdInfo<'a>>) {
+    let all_cmds: Vec<String> = vec![];
+    let cmd_map: HashMap<&str, & types::CmdInfo> = HashMap::new();
+    (all_cmds, cmd_map)
 }

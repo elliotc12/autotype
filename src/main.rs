@@ -1,8 +1,8 @@
-extern crate autotype;
-use autotype::database;
+pub mod database;
+pub mod types;
 
 fn main() {
-    let _sqlite_conn = autotype::database::initialize_database();
+    let _sqlite_conn = database::initialize_database();
     loop {
         match wait_for_action() {
             UserAction::_Cmd(cmd) => respond_to_cmd(cmd),
@@ -19,7 +19,7 @@ fn respond_to_cmd(_cmd: String) {
 }
 
 fn respond_to_cd(dir: String) {
-    repopulate_probability_struct(dir);
+    database::get_new_probability_struct(dir);
 }
 
 fn print_probabilities(_cmd_fragment: String) {
